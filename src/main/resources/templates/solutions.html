@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Digital Solution Map</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    <style>
+        .pagination-centered {
+            text-align: center;
+        }
+        #search_input {width:200px; }
+        #total_count, .control-label, #search_input, .btn-default {display:inline-block;}
+        #total_count {margin-left:30px;}
+        .control-label {margin-left:700px;}
+    </style>
+    <script th:src="@{/js/app.js}"></script>
+
+    <script type="text/javascript">
+        function search(pageSize, page, flag) {
+            $('#pageSize').val(pageSize);
+            $('#page').val(page);
+
+            if(flag == -2) {
+                if ($('#left_double_arrow').closest("li").attr("class") == 'disabled') {
+                    return false;
+                }
+            } else if(flag == -1) {
+                if ($('#left_arrow').closest("li").attr("class") == 'disabled') {
+                    return false;
+                }
+            } else if(flag == 1) {
+                if ($('#right_arrow').closest("li").attr("class") == 'disabled') {
+                    return false;
+                }
+            } else if(flag == 2) {
+                if ($('#right_double_arrow').closest("li").attr("class") == 'disabled') {
+                    return false;
+                }
+            }
+            document.getElementById("listform").submit();
+       }
+    </script>
+</head>
+<body>
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+
+    <div >
+        <!--<h2 th:text=" ${viewType} != null ? 'Solution List (' + ${viewType} + ')' : 'Solution List'"> Solution List</h2>-->
+        <h2> Solution List </h2>
+        <form id="listform" method="post" th:object="${solution}" th:action = "@{/solutions}">
+            <input type="hidden" id="pageSize" name="pageSize" th:value="${pageSize}"/>
+            <input type="hidden" id="page" name="page" th:value="${page}"/>
+            <input type="hidden" id="viewType" name="viewType" th:value="${viewType}"/>
+            <input type="hidden" id="solutionGroup" th:field="*{solutionGroup1}" />
+            <input type="hidden" id="solutionGroup2" th:field="*{solutionGroup2}" />
+            <div class="row" id="search">
+                <p id="total_count" th:text="'총 건수: ' + ${count} + ' 건'"> </p>
+                <label class="control-label">솔루션명:</label>
+                <input type="text" id="search_input" class="form-control" th:field="*{solutionName}"/>
+                <button type="submit" class="btn btn-default">검색</button>
+            </div>
+        </form>
+        <table class="table table-striped">
+            <tr>
+                <th>번호</th>
+                <th>솔루션명</th>
+                <th>주요기능</th>
+                <th>고객기대효과</th>
+                <th>제작사</th>
+                <th>View</th>
+                <th>Edit</th>
+            </tr>
+            <tr th:if="${not #lists.isEmpty(solutions)}" th:each="solution, iterator : ${solutions}">
+                <td th:text="${iterator.index + 1}">번호</td>
+                <td th:text="${solution.solutionName}">솔루션명</td>
+                <td th:text="${solution.function}">주요기능</td>
+                <td th:text="${solution.customerBenefit2}">주요기능</td>
+                <td th:text="${solution.maker}">제작사</td>
+                <td><a th:href="${ '/solution/' + solution.id}">View</a></td>
+                <td><a th:href="${'/solution/edit/' + solution.id}">Edit</a></td>
+            </tr>
+        </table>
+
+    </div>
+    <div class="row">
+        <!--<div class="form-group col-md-1">
+            <select class="form-control pagination" id="pageSizeSelect">
+                <option th:each="pageSize : ${pageSizes}" th:text="${pageSize}" th:value="${pageSize}" th:selected="${pageSize} == ${selectedPageSize}"></option>
+            </select>
+        </div>-->
+        <div th:if="${solutions.totalPages > 0 }" class="form-group col-md-11 pagination-centered">
+            <ul class="pagination">
+                <li th:class="${solutions.number == 0} ? disabled" >
+                    <a id="left_double_arrow" class="pageLink" th:href="'javascript:search(' + ${selectedPageSize} + ', 1, -2)'">&laquo;</a>
+                </li>
+                <li th:class="${solutions.number == 0} ? disabled">
+                    <a id="left_arrow" class="pageLink" th:href="'javascript:search(' + ${selectedPageSize} + ',' + ${solutions.number} + ', -1)'">&larr;</a>
+                </li>
+                <li th:class="${solutions.number == (page - 1)} ? 'active pointer-disabled'"
+                    th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
+                    <a id="paging" class="pageLink" th:href="'javascript:search(' + ${selectedPageSize} + ',' + ${page} + ', 0)'" th:text="${page}"></a>
+                </li>
+                <li th:class="${solutions.number + 1 == solutions.totalPages} ? disabled">
+                    <a id="right_arrow" class="pageLink" th:href="'javascript:search(' + ${selectedPageSize} + ',' + ${solutions.number + 2} + ', 1)'">&rarr;</a>
+                </li>
+                <li th:class="${solutions.number + 1 == solutions.totalPages} ? disabled">
+                    <a id="right_double_arrow" class="pageLink" th:href="'javascript:search(' + ${selectedPageSize} + ',' + ${solutions.totalPages} + ', 2)'">&raquo;</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

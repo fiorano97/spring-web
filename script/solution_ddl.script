@@ -1,0 +1,32 @@
+-- Table: public.solution
+
+-- DROP TABLE public.solution;
+
+CREATE TABLE public.solution
+(
+  id integer NOT NULL,
+  com character varying(255),
+  cb_1 character varying(255),
+  cb_2 character varying(255),
+  dtype character varying(255),
+  eq character varying(255),
+  file bytea,
+  func character varying(5000),
+  img_id character varying(255),
+  img_name character varying(255),
+  maker character varying(255),
+  ref character varying(255),
+  sg_1 character varying(255),
+  sg_2 character varying(255),
+  sname character varying(255),
+  stype character varying(255),
+  source character varying(255),
+  supplier character varying(255),
+  "time" timestamp without time zone,
+  CONSTRAINT solution_pkey PRIMARY KEY ()
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.solution
+  OWNER TO postgres;

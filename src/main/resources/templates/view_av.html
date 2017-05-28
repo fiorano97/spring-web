@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Digital Solution Map</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <link rel="stylesheet" href="/resources/demos/style.css"/>
+    <style>
+        #asset {margin-left: 150px;}
+        #customer { width: 50px; height: 360px; padding: 0.5em;}
+        #customer, #value   {display: inline-block;    vertical-align:top;}
+        #efficiency { width: 80px; height: 148px; padding: 0.5em; }
+        #emission { width: 80px; height: 20px; padding-left: 0.5em; }
+        #flexibility { width: 80px; height: 40px; padding: 0.5em; }
+        #availability { width: 80px; height: 148px; padding: 0.5em; }
+        #customer_value, #value_content {display: inline-block; vertical-align:top; margin-top: 10px;}
+        #common, #common_content {display: inline-block; vertical-align:top;}
+        #internal_value, #internal_content {display: inline-block; vertical-align:top;}
+        #value_content, #common_content, #internal_content {width: 932px; margin-left: 10px; padding: 0em; }
+        #boiler, #st, #gen, #gt, #bop, #plant, #fleet { display: inline-block; width: 130px; height: 50px; padding: 0.5em; vertical-align:top;}
+        #common {width: 135px; height: 63px;}
+        #internal { width: 50px; height: 60px; padding: 0.5em;}
+        #internal, #i_value   {display: inline-block;    vertical-align:top;}
+        #design, #commissioning, #onm { width: 80px; height: 20px; padding-left: 0.5em; }
+        .ui-button {margin: 0%; padding: 0%; font-size:85%;}
+        #ef_1 {width: 800px; height: 20px;}
+        .s-btn {width: 125px; height: 20px;}
+        .ss-btn {width: 60.5px; height: 20px;}
+        #ef_3, #ef_6 {margin-left: 275px;}
+        #ef_4 {margin-left: 5px;}
+        #em_2 {margin-left: 546px;}
+        #fx_3 {margin-left: 148px;}
+        #fx_4 {margin-left: 5px; width: 260px; height:20px;}
+        #fx_9 {margin-left: 417px;}
+        #av_1 {width: 800px; height: 20px;}
+        #av_2 {width: 670px; height: 20px;}
+        #av_4 {width: 260px; height: 20px;}
+        #av_5, #av_6, #av_7, #av_8, #av_10, #av_11, #av_12, #av_15 {margin-left: 6px; }
+        #av_14 {margin-left: 141px; }
+        #cm_1, #cm_2, #cm_3, #in_1, #in_4 {width: 932px; height: 20px;}
+        #in_3 {margin-left:275px;}
+
+    </style><!--
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript">
+        function linkSolutionGroup(solutionGroup2){
+            $('#group').val(solutionGroup2);
+            document.getElementById("listform").submit();
+        }
+   </script>
+</head>
+<body>
+
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+
+    <form id="listform" method="post" th:object="${solution}" th:action = "@{/solutions}">
+        <input type="hidden" name="viewType" th:value="AssetValueView"/>
+        <input type="hidden" id="group" th:field="*{solutionGroup2}"/>
+    </form>
+    <h2>Asset Value View</h2>
+    <div id="asset">
+        <div id="boiler" class="ui-widget-content">
+            <p>Boiler</p>
+        </div>
+        <div id="st" class="ui-widget-content">
+            <p>ST</p>
+        </div>
+        <div id="gen" class="ui-widget-content">
+            <p>GEN</p>
+        </div>
+        <div id="gt" class="ui-widget-content">
+            <p>GT</p>
+        </div>
+        <div id="bop" class="ui-widget-content">
+            <p>BOP</p>
+        </div>
+        <div id="plant" class="ui-widget-content">
+            <p>Plant</p>
+        </div>
+        <div id="fleet" class="ui-widget-content">
+            <p>Fleet</p>
+        </div>
+    </div>
+    <div id="customer_value">
+        <div id="customer" class="ui-widget-content">
+            <p>고객</p>
+        </div>
+        <div id="value" class="ui-widget-content">
+            <div id="efficiency" class="ui-widget-content">
+                <p>Efficiency</p>
+            </div>
+            <div id="emission" class="ui-widget-content">
+                <p>Emission</p>
+            </div>
+            <div id="flexibility" class="ui-widget-content">
+                <p>Flexibility</p>
+            </div>
+            <div id="availability" class="ui-widget-content">
+                <p>Availability</p>
+            </div>
+        </div>
+    </div>
+    <div id="value_content" >
+        <button id="ef_1" class="ui-button ui-widget" onclick="linkSolutionGroup('효율감시_효율진단')">효율(성능)감시</button><br/>
+        <button id="ef_2" class="ui-button ui-widget s-btn" onclick="linkSolutionGroup('연료최적화')">연료최적화</button>
+        <button id="ef_3" class="ui-button ui-widget s-btn" onclick="linkSolutionGroup('연료제어튜닝최적화')">연료/제어 튜닝/최적화</button>
+        <button id="ef_4" class="ui-button ui-widget s-btn" onclick="linkSolutionGroup('AuxPower최적화')">Aux.Power최적화</button> <br/>
+        <button id="ef_5" class="ui-button ui-widget s-btn" onclick="linkSolutionGroup('sootblowing최적화')">Sootblowing최적화</button>
+        <button id="ef_6" class="ui-button ui-widget s-btn" onclick="linkSolutionGroup('압축기Fouling예측')">압축기Fouling예측</button><br/>
+        <button id="ef_7" class="ui-button ui-widget s-btn" onclick="linkSolutionGroup('증기온도제어최적화')">증기온도/제어최적화</button><br/>
+        <button id="ef_8" class="ui-button ui-widget s-btn" onclick="linkSolutionGroup('Coal분석Flow감시')">Coal분석/Flow감시</button><br/>
+        <button id="ef_9" class="ui-button ui-widget ss-btn" onclick="linkSolutionGroup('LowLoss')">Low Loss</button>
+        <button id="ef_10" class="ui-button ui-widget ss-btn" onclick="linkSolutionGroup('LowThrot')">Low Throt.</button><br/>
+        <button id="ef_11" class="ui-button ui-widget s-btn" onclick="linkSolutionGroup('CoalBlending')">Coal Blending</button><br/>
+        <button id="em_1" class="ui-button ui-widget s-btn" onclick="linkSolutionGroup('연소Opt')">연소 Opt.</button>
+        <button id="em_2" class="ui-button ui-widget s-btn" onclick="linkSolutionGroup('오염물질감시')">오염물질감시</button><br/>
+        <button id="fx_1" class="ui-button ui-widget s-btn" onclick="linkSolutionGroup('BLR기동시간단축')">기동시간 단축</button>
+        <button id="fx_2" class="ui-button ui-widget s-btn" onclick="linkSolutionGroup('ST기동시간단축')">기동시간 단축</button>
+        <button id="fx_3" class="ui-button ui-widget s-btn" onclick="linkSolutionGroup('GT기동시간단축')">기동시간 단축</button>
+        <button id="fx_4" class="ui-button ui-widget" onclick="linkSolutionGroup('Plant기동시간단축')">TPP/CCPP 기동시간 단축</button>
+        <button id="fx_5" class="ui-button ui-widget s-btn" onclick="linkSolutionGroup('FleetOpt')">Fleet Opt.</button><br/>
+        <button id="fx_6" class="ui-button ui-widget ss-btn" onclick="linkSolutionGroup('로직튜닝')">로직튜닝</button>
+        <button id="fx_7" class="ui-button ui-widget ss-btn" onclick="linkSolutionGroup('MinLoad')">Min.Load</button>
+        <button id="fx_8" class="ui-button ui-widget s-btn" onclick="linkSolutionGroup('급수펌프운전')">급수펌프운전</button>
+        <button id="fx_9" class="ui-button ui-widget s-btn" onclick="linkSolutionGroup('부하최소화최대화')">부하최소화/최대화</button><br/>
+        <button id="av_1" class="ui-button ui-widget" onclick="linkSolutionGroup('건전성감시_조기경보_고장진단')">건전성 감시/진단/예측(신뢰성평가), 조기경보, 고장DB/원인분석</button><br/>
+        <button id="av_2" class="ui-button ui-widget" onclick="linkSolutionGroup('진동감시_진단')">회전체/구조물 진동감시/진단/예측</button>
+        <button id="av_3" class="ui-button ui-widget s-btn" onclick="linkSolutionGroup('전기설비감시')">전기설비감시</button><br/>
+        <button id="av_4" class="ui-button ui-widget" onclick="linkSolutionGroup('수명평가')">수명평가</button>
+        <button id="av_5" class="ui-button ui-widget s-btn" onclick="linkSolutionGroup('부분방전')">부분방전</button>
+        <button id="av_6" class="ui-button ui-widget s-btn" onclick="linkSolutionGroup('GasPath진단')">Gas Path 진단</button>
+        <button id="av_7" class="ui-button ui-widget s-btn" onclick="linkSolutionGroup('서보밸브진단')">서보/밸브진단</button>
+            <button id="av_8" class="ui-button ui-widget s-btn" onclick="linkSolutionGroup('센서건전성감시')">센서건전성감시</button><br/>
+        <button id="av_9" class="ui-button ui-widget s-btn" onclick="linkSolutionGroup('전열관온도_산화막')">전열관온도/산화막</button>
+        <button id="av_10" class="ui-button ui-widget s-btn" onclick="linkSolutionGroup('밸브수명평가')">밸브수명평가</button>
+        <button id="av_11" class="ui-button ui-widget s-btn" onclick="linkSolutionGroup('고정자누설')">고정자누설</button>
+        <button id="av_12" class="ui-button ui-widget s-btn" onclick="linkSolutionGroup('블레이드온도_TBC감시')">블레이드온도/TBC감시</button><br/>
+        <button id="av_13" class="ui-button ui-widget s-btn" onclick="linkSolutionGroup('튜브파손누설감시')">튜브파손/누설감시</button>
+        <button id="av_14" class="ui-button ui-widget s-btn" onclick="linkSolutionGroup('발전기단락감시')">단락감시</button>
+        <button id="av_15" class="ui-button ui-widget s-btn" onclick="linkSolutionGroup('수명평가')">수명평가</button><br/>
+        <button id="av_16" class="ui-button ui-widget s-btn" onclick="linkSolutionGroup('클링커감시_화로온도감시')">Clinker/화로온도감시</button><br/>
+        <button id="av_17" class="ui-button ui-widget s-btn" onclick="linkSolutionGroup('미분기감시')">미분기감시</button><br/>
+    </div>
+    <!-- common part -->
+    <div id="common" class="ui-widget-content">
+        <p>Common</p>
+    </div>
+    <div id="common_content" >
+        <button id="cm_1" class="ui-button ui-widget" onclick="linkSolutionGroup('공통기술')">PI, 무선측위, 데이터 분석, 지식/경험 DB, 제품/제조 DB(설비관리), 프로젝트 정보 DB, AR/VR, 시뮬레이터</button><br/>
+        <button id="cm_2" class="ui-button ui-widget" onclick="linkSolutionGroup('Platform_Cloud')">Platform/Cloud</button><br/>
+        <button id="cm_3" class="ui-button ui-widget" onclick="linkSolutionGroup('Security')">Security</button><br/>
+    </div>
+
+    <!-- internal part -->
+    <div id="internal_value">
+        <div id="internal" class="ui-widget-content">
+            <p>내부</p>
+        </div>
+        <div id="i_value" class="ui-widget-content">
+            <div id="design" class="ui-widget-content">
+                <p>설계</p>
+            </div>
+            <div id="commissioning" class="ui-widget-content">
+                <p>시운전</p>
+            </div>
+            <div id="onm" class="ui-widget-content">
+                <p>O&amp;M</p>
+            </div>
+        </div>
+    </div>
+    <div id="internal_content" >
+        <button id="in_1" class="ui-button ui-widget" onclick="linkSolutionGroup('VE_DesignTool_LaserScan')">Virtual Engineering, Design Tool, Laser Scanning</button><br/>
+        <button id="in_2" class="ui-button ui-widget s-btn" onclick="linkSolutionGroup('BLR운전로직튜닝')">운전로직튜닝</button>
+        <button id="in_3" class="ui-button ui-widget s-btn" onclick="linkSolutionGroup('GT운전로직튜닝')">운전로직튜닝</button><br/>
+        <button id="in_4" class="ui-button ui-widget" onclick="linkSolutionGroup('자동NDE')">자동NDE</button><br/>
+    </div>
+
+
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+-- Table: public.upload_file
+
+-- DROP TABLE public.upload_file;
+
+CREATE TABLE public.upload_file
+(
+  id integer NOT NULL,
+  content_type character varying(255),
+  file_name character varying(255),
+  file_path character varying(255),
+  reg_date timestamp without time zone,
+  save_file_name character varying(255),
+  size bigint,
+  CONSTRAINT upload_file_pkey PRIMARY KEY (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.upload_file
+  OWNER TO postgres;

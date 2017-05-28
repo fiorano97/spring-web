@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Digital Solution Map</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <link rel="stylesheet" href="/resources/demos/style.css"/>
+    <style>
+        #connection { width: 150px; height: 561px; padding: 0.5em;}
+        #connection, #app_platform   {display: inline-block;    vertical-align:top;}
+        #draggable1, #draggable2, #draggable3,#draggable4,#draggable5 { display: inline-block; width: 150px; height: 400px; padding: 0.5em; vertical-align:top;}
+        #platform, #cloud { width: 765px; height: 80px; padding: 0.5em;}
+        #security { width: 920px; height: 80px; padding: 0.5em;}
+        .ui-button {width: 130px; height: 40px; font-size:85%;}
+
+    </style><!--
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript">
+        function linkSolutionGroup(solutionGroup){
+            $('#group').val(solutionGroup);
+            document.getElementById("listform").submit();
+        }
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <h2>SW Functional View</h2>
+    <form id="listform" method="post" th:object="${solution}" th:action = "@{/solutions}">
+        <input type="hidden" name="viewType" th:value="SWFunctionalView"/>
+        <input type="hidden" id="group" th:field="*{solutionGroup1}"/>
+    </form>
+    <div id="connection" class="ui-widget-content">
+        <p>Connection</p>
+        <button class="ui-button ui-widget ui-corner-all" onclick="linkSolutionGroup('ITsystemIF')">IT System I/F</button>
+        <button class="ui-button ui-widget ui-corner-all" onclick="linkSolutionGroup('OTsystemIF')">OT System I/F</button>
+    </div>
+    <div id="app_platform">
+    <div id="application">
+        <div id="draggable1" class="ui-widget-content">
+            <p>Monitoring</p>
+            <button class="ui-button ui-widget ui-corner-all" onclick="linkSolutionGroup('운전정보')">운전정보</button>
+            <button class="ui-button ui-widget ui-corner-all" onclick="linkSolutionGroup('진동감시')">진동감시</button>
+            <button class="ui-button ui-widget ui-corner-all" onclick="linkSolutionGroup('건전성감시')">건전성감시</button>
+            <button class="ui-button ui-widget ui-corner-all" onclick="linkSolutionGroup('효율감시')">효율(성능)감시</button>
+            <button class="ui-button ui-widget ui-corner-all" onclick="linkSolutionGroup('통합경보')">통합경보</button>
+            <button class="ui-button ui-widget ui-corner-all" onclick="linkSolutionGroup('보조감시설비정보')">보조감시설비정보</button>
+        </div>
+        <div id="draggable2" class="ui-widget-content">
+            <p>Prediction</p>
+            <button class="ui-button ui-widget ui-corner-all" onclick="linkSolutionGroup('조기경보')">이상징후예측</button>
+            <button class="ui-button ui-widget ui-corner-all" onclick="linkSolutionGroup('잔존수명예측')">잔존수명예측</button>
+            <button class="ui-button ui-widget ui-corner-all" onclick="linkSolutionGroup('Slagging예측')">Slgging/Fouling예측</button>
+        </div>
+        <div id="draggable3" class="ui-widget-content">
+            <p>Diagnosis</p>
+            <button class="ui-button ui-widget ui-corner-all" onclick="linkSolutionGroup('고장원인판단')">고장원인판단</button>
+            <button class="ui-button ui-widget ui-corner-all" onclick="linkSolutionGroup('진동원인진단')">진동원인진단</button>
+            <button class="ui-button ui-widget ui-corner-all" onclick="linkSolutionGroup('이상징후예측')">이상징후예측</button>
+            <button class="ui-button ui-widget ui-corner-all" onclick="linkSolutionGroup('효율진단')">효율(성능)진단</button>
+        </div>
+
+        <div id="draggable4" class="ui-widget-content">
+            <p>Optimization</p>
+            <button class="ui-button ui-widget ui-corner-all" onclick="linkSolutionGroup('연료최적화')">연료최적화</button>
+            <button class="ui-button ui-widget ui-corner-all" onclick="linkSolutionGroup('연소최적화')">연소최적화</button>
+            <button class="ui-button ui-widget ui-corner-all" onclick="linkSolutionGroup('Sootblower최적화')">Sootblower 최적화</button>
+            <button class="ui-button ui-widget ui-corner-all" onclick="linkSolutionGroup('증기온도최적화')">증기온도최적화</button>
+            <button class="ui-button ui-widget ui-corner-all" onclick="linkSolutionGroup('제어파라미터최적화')">제어파라미터최적화</button>
+            <button class="ui-button ui-widget ui-corner-all" onclick="linkSolutionGroup('기동시간최적화')">기동시간최적화</button>
+            <button class="ui-button ui-widget ui-corner-all" onclick="linkSolutionGroup('정비최적화')">정비최적화</button>
+            <button class="ui-button ui-widget ui-corner-all" onclick="linkSolutionGroup('운전최적화')">운전최적화</button>
+        </div>
+
+        <div id="draggable5" class="ui-widget-content">
+            <p>Management</p>
+            <button class="ui-button ui-widget ui-corner-all" onclick="linkSolutionGroup('지식경험DB')">지식/경험DB</button>
+            <button class="ui-button ui-widget ui-corner-all" onclick="linkSolutionGroup('제품제조DB')">제품/제조DB</button>
+            <button class="ui-button ui-widget ui-corner-all" onclick="linkSolutionGroup('프로젝트정보DB')">프로젝트정보DB</button>
+            <button class="ui-button ui-widget ui-corner-all" onclick="linkSolutionGroup('협업포털')">협업포털</button>
+        </div>
+    </div>
+        <div id="platform" class="ui-widget-content">
+            <p>Platform</p>
+            <button class="ui-button ui-widget ui-corner-all" onclick="linkSolutionGroup('PaaS')">PaaS</button>
+            <button class="ui-button ui-widget ui-corner-all" onclick="linkSolutionGroup('Integration')">Integration</button>
+            <button class="ui-button ui-widget ui-corner-all" onclick="linkSolutionGroup('DataAnalytics')">Data Analytics</button>
+        </div>
+        <div id="cloud" class="ui-widget-content">
+            <p>Cloud(IaaS)</p>
+        </div>
+    </div>
+    <div id="security" class="ui-widget-content">
+        <p>Security</p>
+    </div>
+
+</div>
+
+
+</body>
+</html>
