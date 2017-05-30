@@ -77,18 +77,20 @@ public class SolutionController {
 
     @RequestMapping(value = "solution", method = RequestMethod.POST)
     public String saveProduct(Solution solution,
+                              @RequestParam("imageCheck") Optional<List<Integer>> imageCheckList,
+                              @RequestParam("fileCheck") Optional<List<Integer>> fileCheckList,
                               @RequestParam("uploadingImageFiles") MultipartFile[] uploadingImageFiles,
                               @RequestParam("uploadingFiles") MultipartFile[] uploadingFiles){
 
-        if(uploadingImageFiles != null) {
-            solution.setImageId(storeFiles(solution, uploadingImageFiles));
-        }
-        if(uploadingFiles != null) {
-            solution.setFileId(storeFiles(solution, uploadingFiles));
-        }
+        solution.setImageId(storeFiles(deleteCheckedFiles(solution.getImageId(), imageCheckList), uploadingImageFiles));
+        solution.setFileId(storeFiles(deleteCheckedFiles(solution.getFileId(), fileCheckList), uploadingFiles));
+
         solutionService.saveSolution(solution);
+
         return "redirect:/solution/" + solution.getId();
     }
+
+
 
     @RequestMapping("/solutions")
     public ModelAndView showPersonsPage(Solution solution,
@@ -177,8 +179,7 @@ public class SolutionController {
         return fileInfoList;
     }
 
-    private List<Integer> storeFiles(Solution solution, MultipartFile[] uploadingFiles) {
-        List<Integer> fileIdList = new ArrayList<>();
+    private List<Integer> storeFiles(List<Integer> fileList, MultipartFile[] uploadingFiles) {
         UploadFile uploadedFile = null;
         for(MultipartFile uploadingFile : uploadingFiles) {
 
@@ -189,7 +190,22 @@ public class SolutionController {
                     e.printStackTrace();
                 }
 
-                fileIdList.add(uploadedFile.getId());
+                fileList.add(uploadedFile.getId());
+            }
+        }
+        return fileList;
+    }
+
+    private  List<Integer> deleteCheckedFiles(List<Integer> fileIdList, Optional<List<Integer>> fileCheckList) {
+        if(fileCheckList.isPresent()) {
+            List<Integer> chList = fileCheckList.get();
+            for(int i =0; i < chList.size(); i++){
+                for(int j=0; j < fileIdList.size(); j++) {
+                    if(fileIdList.get(j) == chList.get(i)) {
+                        fileIdList.remove(j);
+                        break;
+                    }
+                }
             }
         }
         return fileIdList;

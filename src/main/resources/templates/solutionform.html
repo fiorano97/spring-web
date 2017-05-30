@@ -5,7 +5,10 @@
     <title>Digital Solution Map</title>
     <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
     <style>
-        .row {margin-left: 94%;}
+        .row {margin-left: 17%;}
+        #text_file_delete, #text_image_delete {color: blue;}
+        .checkbox_image, #text_image_delete {display:inline-block;}
+        .checkbox_file, #text_file_delete {display:inline-block;}
     </style>
 </head>
 <body>
@@ -18,6 +21,8 @@
         <form class="form-horizontal" th:object="${solution}" th:action="@{/solution}" method="post" enctype="multipart/form-data">
             <input type="hidden" th:field="*{id}"/>
             <input type="hidden" th:field="*{time}"/>
+            <input type="hidden" th:field="*{imageId}"/>
+            <input type="hidden" th:field="*{fileId}"/>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Solution Name:</label>
                 <div class="col-sm-10">
@@ -108,8 +113,13 @@
                 <p>
                     <input id="imageInput" type="file" name="uploadingImageFiles" multiple="multiple" />
                 </p>
-                    <div th:if="${not #lists.isEmpty(images)}" th:each="fileId, iterator : ${images}">
-                        <img th:src="@{'/files/' + ${fileId}}" width="400" height="auto"/>
+                    <div th:if="${not #lists.isEmpty(images)}">
+
+                        <div th:each="fileId, iterator : ${images}">
+                            <img th:src="@{'/files/' + ${fileId}}" width="400" height="auto"/>
+                            <input class="checkbox_image" type="checkbox" name="imageCheck" th:value="${fileId}" />
+                            <p id="text_image_delete" th:text="${type}=='insert' ? '' : 'check to delete'"> </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -121,8 +131,13 @@
                     <p>
                         <input id="fileInput" type="file" name="uploadingFiles" multiple="multiple" />
                     </p>
-                    <div th:if="${not #lists.isEmpty(files)}" th:each="file, iterator : ${files}">
-                        <a th:href="@{'/files/' + ${file.fileId}}" th:text="${file.fileName}"></a>
+                    <div th:if="${not #lists.isEmpty(files)}">
+
+                        <div th:each="file, iterator : ${files}">
+                            <a th:href="@{'/files/' + ${file.fileId}}" th:text="${file.fileName}"></a>
+                            <input class="checkbox_file" type="checkbox" name="fileCheck" th:value="${file.fileId}" />
+                            <p id="text_file_delete" th:text="${type}=='insert' ? '' : 'check to delete'"> </p>
+                        </div>
                     </div>
                 </div>
             </div>
