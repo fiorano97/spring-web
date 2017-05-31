@@ -4,7 +4,7 @@
 
     <title>Digital Solution Map</title>
 
-    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    <th:block th:include="fragments/headerinc :: head"></th:block>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
     <link rel="stylesheet" href="/resources/demos/style.css"/>
     <style>
@@ -15,8 +15,7 @@
         #security { width: 920px; height: 80px; padding: 0.5em;}
         .ui-button {width: 130px; height: 40px; font-size:85%;}
 
-    </style><!--
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
+    </style>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript">
         function linkSolutionGroup(solutionGroup){
@@ -60,7 +59,7 @@
             <p>Diagnosis</p>
             <button class="ui-button ui-widget ui-corner-all" onclick="linkSolutionGroup('고장원인판단')">고장원인판단</button>
             <button class="ui-button ui-widget ui-corner-all" onclick="linkSolutionGroup('진동원인진단')">진동원인진단</button>
-            <button class="ui-button ui-widget ui-corner-all" onclick="linkSolutionGroup('이상징후예측')">이상징후예측</button>
+            <button class="ui-button ui-widget ui-corner-all" onclick="linkSolutionGroup('수명평가진단')">수명평가진단</button>
             <button class="ui-button ui-widget ui-corner-all" onclick="linkSolutionGroup('효율진단')">효율(성능)진단</button>
         </div>
 

@@ -4,7 +4,8 @@
 
     <title>Digital Solution Map</title>
 
-    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    <th:block th:include="fragments/headerinc :: head"></th:block>
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css" />
     <style>
         .pagination-centered {
             text-align: center;
@@ -21,6 +22,7 @@
             word-wrap: break-all; /* Internet Explorer 5.5+ */
         }
     </style>
+    <script th:src="@{/js/jquery.tablesorter.min.js}"></script>
     <script type="text/javascript">
         function search(pageSize, page, flag) {
             $('#pageSize').val(pageSize);
@@ -46,6 +48,13 @@
             document.getElementById("listform").submit();
        }
     </script>
+    <script>
+        $(document).ready(function()
+            {
+                $("#myTable").tablesorter({headers: { 0:{sorter: false}}});
+            }
+        );
+    </script>
 </head>
 <body>
 <div class="container">
@@ -67,7 +76,8 @@
                 <button type="submit" class="btn btn-default">검색</button>
             </div>
         </form>
-        <table class="table table-striped">
+        <table id="myTable" class="table table-striped tablesorter">
+            <thead>
             <tr>
                 <th>번호</th>
                 <th>솔루션명</th>
@@ -78,15 +88,18 @@
                 <th>제작사</th>
 
             </tr>
+            </thead>
+            <tbody>
             <tr th:if="${not #lists.isEmpty(solutions)}" th:each="solution, iterator : ${solutions}">
                 <td width="10" th:text="${iterator.index + 1}"></td>
                 <td width="80"><a th:href="${ '/solution/' + solution.id}"><span th:text="${solution.solutionName}"></span></a></td>
                 <td width="40" th:text="${solution.equipment}"></td>
-                <td width="300" th:text="${solution.function}"></td>
-                <td width="40" th:text="${solution.customerBenefit2}"></td>
+                <td width="260" th:text="${solution.function}"></td>
+                <td width="60" th:text="${solution.customerBenefit2}"></td>
                 <td width="40" th:text="${solution.developmentType}"></td>
                 <td width="40" th:text="${solution.maker}"></td>
             </tr>
+            </tbody>
         </table>
 
     </div>
