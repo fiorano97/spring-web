@@ -6,10 +6,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface SolutionRepository extends PagingAndSortingRepository<Solution, Integer> {
-    Page<Solution> findAllBySolutionGroup1(String group, Pageable pageable);
-    Page<Solution> findAllBySolutionGroup2(String group, Pageable pageable);
-    Page<Solution> findAllBySolutionNameIsLike(String sName, Pageable pageable);
-    Page<Solution> findAllBySolutionGroup1AndSolutionNameIsLike(String group, String sName, Pageable pageable);
-    Page<Solution> findAllBySolutionGroup2AndSolutionNameIsLike(String group, String sName, Pageable pageable);
+    Page<Solution> findAllByOrderBySolutionName(Pageable pageable);
+    Page<Solution> findAllBySolutionGroup1OrderBySolutionName(String group, Pageable pageable);
+    Page<Solution> findAllBySolutionGroup2OrderBySolutionName(String group, Pageable pageable);
+    Page<Solution> findAllBySolutionNameIsLikeOrderBySolutionName(String sName, Pageable pageable);
+    Page<Solution> findAllBySolutionGroup1AndSolutionNameIsLikeOrderBySolutionName(String group, String sName, Pageable pageable);
+    Page<Solution> findAllBySolutionGroup2AndSolutionNameIsLikeOrderBySolutionName(String group, String sName, Pageable pageable);
 
 }

@@ -18,32 +18,32 @@ public class SolutionServiceImpl implements SolutionService {
 
     @Override
     public Page<Solution> findAllPageable(Pageable pageable) {
-        return solutionRepository.findAll(pageable);
+        return solutionRepository.findAllByOrderBySolutionName(pageable);
     }
 
     @Override
     public Page<Solution> listSolutionsBySolutionName(String sName, Pageable pageable) {
-        return solutionRepository.findAllBySolutionNameIsLike(sName, pageable);
+        return solutionRepository.findAllBySolutionNameIsLikeOrderBySolutionName(sName, pageable);
     }
 
     @Override
     public Page<Solution> listSolutionsByGroup(String group, Pageable pageable) {
-        return solutionRepository.findAllBySolutionGroup1(group, pageable);
+        return solutionRepository.findAllBySolutionGroup1OrderBySolutionName(group, pageable);
     }
 
     @Override
     public Page<Solution> listSolutionsByGroup2(String group, Pageable pageable) {
-        return solutionRepository.findAllBySolutionGroup2(group, pageable);
+        return solutionRepository.findAllBySolutionGroup2OrderBySolutionName(group, pageable);
     }
 
     @Override
     public Page<Solution> listSolutionsByGroupAndSolutionName(String group, String solutionName, Pageable pageable) {
-        return solutionRepository.findAllBySolutionGroup1AndSolutionNameIsLike(group, solutionName, pageable);
+        return solutionRepository.findAllBySolutionGroup1AndSolutionNameIsLikeOrderBySolutionName(group, solutionName, pageable);
     }
 
     @Override
     public Page<Solution> listSolutionsByGroup2AndSolutionName(String group, String solutionName, Pageable pageable) {
-        return solutionRepository.findAllBySolutionGroup2AndSolutionNameIsLike(group, solutionName, pageable);
+        return solutionRepository.findAllBySolutionGroup2AndSolutionNameIsLikeOrderBySolutionName(group, solutionName, pageable);
     }
 
     @Override
