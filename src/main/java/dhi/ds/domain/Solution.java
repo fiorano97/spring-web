@@ -33,8 +33,11 @@ public class Solution {
     @Column(name="cb_2")
     private String customerBenefit2;
 
-    @Column(name="func", length=5000)
+    @Column(name="func", length=512)
     private String function;
+
+    @Column(name="description", length=5000)
+    private String description;
 
     @Column(name="maker")
     private String maker;
@@ -139,6 +142,14 @@ public class Solution {
 
     public void setFunction(String function) {
         this.function = function;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getMaker() {

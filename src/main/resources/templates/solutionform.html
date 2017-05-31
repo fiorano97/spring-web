@@ -9,7 +9,7 @@
         #text_file_delete, #text_image_delete {color: blue;}
         .checkbox_image, #text_image_delete {display:inline-block;}
         .checkbox_file, #text_file_delete {display:inline-block;}
-        #functionDiv {height:110px;}
+        #descDiv {height:110px;}
         textarea {resize: none;}
         textarea.form-control {height:100%;}
     </style>
@@ -27,7 +27,7 @@
             <input type="hidden" th:field="*{imageId}"/>
             <input type="hidden" th:field="*{fileId}"/>
             <div class="form-group">
-                <label class="col-sm-2 control-label">Solution Name:</label>
+                <label class="col-sm-2 control-label">솔루션 명:</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" th:field="*{solutionName}" th:required="true" />
                 </div>
@@ -69,43 +69,49 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">Function:</label>
-                <div id="functionDiv" class="col-sm-10">
-                    <textarea class="form-control" th:field="*{function}"/>
+                <label class="col-sm-2 control-label">주요 기능:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{function}"/>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">Maker:</label>
+                <label class="col-sm-2 control-label">솔루션 설명:</label>
+                <div id="descDiv" class="col-sm-10">
+                    <textarea class="form-control" th:field="*{description}"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">제작사:</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" th:field="*{maker}"/>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">Supplier:</label>
+                <label class="col-sm-2 control-label">공급사:</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" th:field="*{supplier}"/>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">Solution Type:</label>
+                <label class="col-sm-2 control-label">Solution Type <br/>(SW, SW+HW):</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" th:field="*{solutionType}"/>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">Development Type:</label>
+                <label class="col-sm-2 control-label">Development Type <br/>(상용, 자체개발):</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" th:field="*{developmentType}"/>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">Reference</label>
+                <label class="col-sm-2 control-label">적용 사례</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" th:field="*{reference}"/>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">Source</label>
+                <label class="col-sm-2 control-label">출처</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" th:field="*{source}"/>
                 </div>
