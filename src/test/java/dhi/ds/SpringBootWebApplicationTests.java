@@ -15,7 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = SpringBootWebApplication.class)
 @WebAppConfiguration
-@TestPropertySource(locations="classpath:application-local.properties")
+@TestPropertySource(locations="classpath:application-dev.properties")
 public class SpringBootWebApplicationTests {
 	@Test
 	public void contextLoads() {
