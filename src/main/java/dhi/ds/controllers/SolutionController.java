@@ -34,17 +34,21 @@ public class SolutionController {
     private static final int INITIAL_PAGE_SIZE = 5;
     private static final int[] PAGE_SIZES = { 5, 10, 20 };
 
-    @Autowired
-    private Environment env;
-
-    @Autowired
-    FileService fileService;
-
+    private FileService fileService;
     private SolutionService solutionService;
+
+    @Autowired
+    Environment env;
 
     @Autowired
     public void setSolutionService(SolutionService solutionService) {
         this.solutionService = solutionService;
+    }
+
+    @Autowired
+    public void setFileService(FileService fileService) {
+        fileService.setRootLocation(env.getProperty("path.uploadedFiles"));
+        this.fileService = fileService;
     }
 
     @RequestMapping("solution/{id}")

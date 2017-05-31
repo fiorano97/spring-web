@@ -6,6 +6,8 @@ import dhi.ds.util.UploadFileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
@@ -25,15 +27,18 @@ public class FileService {
 
     private static final Logger logger = LoggerFactory.getLogger(FileService.class);
 
-    private final Path rootLocation;
+    private Path rootLocation;
 
     @Autowired
     public FileService() {
-        this.rootLocation = Paths.get("D:/uploads/");
     }
 
     @Autowired
     FileRepository fileRepository;
+
+    public void setRootLocation(String rootLocation) {
+        this.rootLocation = Paths.get(rootLocation);
+    }
 
     public Stream<Integer> loadAll() {
         List<UploadFile> files = fileRepository.findAll();
