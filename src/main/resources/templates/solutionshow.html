@@ -7,7 +7,17 @@
     <style>
         .text-group { display: inline-block; padding: 0.5em; vertical-align:top; }
         #image_div, #file_div {margin-top: 8px;}
+        .row {margin-left: 17%;}
+        #listBtn, #editBtn {display:inline-block;}
     </style>
+    <script>
+        function list(){
+            window.location.href = '/solutions';
+        }
+        function search(id) {
+            window.location.href = '/solution/edit/' + id;
+        }
+    </script>
 </head>
 <body>
 <div class="container">
@@ -42,8 +52,9 @@
                         <p class="form-control-static" th:text="${solution.customerBenefit1} + ' / ' + ${solution.customerBenefit2}">description</p>
                     </div>
                     <label class="col-sm-2 control-label">Function:</label>
-                    <div class="col-sm-10">
-                        <p class="form-control-static" th:text="${solution.function}">description</p>
+                    <div class="col-sm-10"><pre style="word-wrap: break-word;white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-break:break-all;">
+                        <p class="form-control-static" th:text="${solution.function}">description </p>
+                    </pre>
                     </div>
                     <label class="col-sm-2 control-label">Maker:</label>
                     <div class="col-sm-4">
@@ -74,6 +85,10 @@
 
                 </div>
             </form>
+            <div class="row">
+                <button id="listBtn" type="button" class="btn btn-default" th:onclick="'list()'">List</button>
+                <button id="editBtn" type="button" class="btn btn-default" th:onclick="'search(' + ${solution.id} +')'">Edit</button>
+            </div>
     </div>
 </div>
 

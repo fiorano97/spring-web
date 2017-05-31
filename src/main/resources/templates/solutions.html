@@ -13,6 +13,13 @@
         #total_count, .control-label, #search_input, .btn-default {display:inline-block;}
         #total_count {margin-left:30px;}
         .control-label {margin-left:700px;}
+        td {
+            white-space: pre-wrap; /* CSS3*/
+            white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+            white-space: -pre-wrap; /* Opera 4-6 */
+            white-space: -o-pre-wrap; /* Opera 7 */
+            word-wrap: break-all; /* Internet Explorer 5.5+ */
+        }
     </style>
     <script th:src="@{/js/app.js}"></script>
 
@@ -66,20 +73,21 @@
             <tr>
                 <th>번호</th>
                 <th>솔루션명</th>
+                <th>관련기기</th>
                 <th>주요기능</th>
                 <th>고객기대효과</th>
+                <th>유형</th>
                 <th>제작사</th>
-                <th>View</th>
-                <th>Edit</th>
+
             </tr>
             <tr th:if="${not #lists.isEmpty(solutions)}" th:each="solution, iterator : ${solutions}">
                 <td th:text="${iterator.index + 1}">번호</td>
-                <td th:text="${solution.solutionName}">솔루션명</td>
-                <td th:text="${solution.function}">주요기능</td>
+                <td><a th:href="${ '/solution/' + solution.id}"><span th:text="${solution.solutionName}"></span></a></td>
+                <td th:text="${solution.equipment}">주기기</td>
+                <td class="col-sm-6" th:text="${solution.function}"></td>
                 <td th:text="${solution.customerBenefit2}">주요기능</td>
+                <td th:text="${solution.developmentType}"></td>
                 <td th:text="${solution.maker}">제작사</td>
-                <td><a th:href="${ '/solution/' + solution.id}">View</a></td>
-                <td><a th:href="${'/solution/edit/' + solution.id}">Edit</a></td>
             </tr>
         </table>
 
