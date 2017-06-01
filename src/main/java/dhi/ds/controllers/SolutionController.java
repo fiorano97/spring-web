@@ -31,7 +31,7 @@ public class SolutionController {
 
     private static final int BUTTONS_TO_SHOW = 5;
     private static final int INITIAL_PAGE = 0;
-    private static final int INITIAL_PAGE_SIZE = 5;
+    private static final int INITIAL_PAGE_SIZE = 10;
     private static final int[] PAGE_SIZES = { 5, 10, 20 };
 
     private FileService fileService;
@@ -98,35 +98,55 @@ public class SolutionController {
 
     @RequestMapping("/solutions")
     public ModelAndView showPersonsPage(Solution solution,
+                                        @RequestParam("searchCondition") Optional<String> searchCondition,
+                                        @RequestParam("searchInput") Optional<String> searchInput,
                                         @RequestParam("viewType") Optional<String> viewType,
                                         @RequestParam("pageSize") Optional<Integer> pageSize,
                                         @RequestParam("page") Optional<Integer> page) {
         ModelAndView modelAndView = new ModelAndView("solutions");
         int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
         int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
+        String searchCond = searchCondition.orElse("0");
+        String searchIn = searchInput.orElse("");
         Page<Solution> solutions = null;
-        String solutionName = null;
+        String solutionName, maker = null;
         if(viewType.isPresent() && !viewType.get().toString().equals("")) {
             if(viewType.get().toString().equals("AssetValueView")) {
-                if (solution != null && solution.getSolutionName() != null && !solution.getSolutionName().equals("")) {
-                    solutionName = "%" + solution.getSolutionName() + "%";
-                    solutions = solutionService.listSolutionsByGroup2AndSolutionName(solution.getSolutionGroup2(), solutionName, new PageRequest(evalPage, evalPageSize));
+
+                if (solution != null && searchIn != null && !searchIn.equals("")) {
+                    if(searchCond.equals("0")) {
+                        solutionName = "%" + searchIn + "%";
+                        solutions = solutionService.listSolutionsByGroup2AndSolutionName(solution.getSolutionGroup2(), solutionName, new PageRequest(evalPage, evalPageSize));
+                    } else {
+                        maker = "%" + searchIn + "%";
+                        solutions = solutionService.listSolutionsByGroup2AndMaker(solution.getSolutionGroup2(), maker, new PageRequest(evalPage, evalPageSize));
+                    }
                 } else {
                     solutions = solutionService.listSolutionsByGroup2(solution.getSolutionGroup2(), new PageRequest(evalPage, evalPageSize));
                 }
             } else {
-                if (solution != null && solution.getSolutionName() != null && !solution.getSolutionName().equals("")) {
-                    solutionName = "%" + solution.getSolutionName() + "%";
-                    solutions = solutionService.listSolutionsByGroupAndSolutionName(solution.getSolutionGroup1(), solutionName, new PageRequest(evalPage, evalPageSize));
+                if (solution != null && searchIn != null && !searchIn.equals("")) {
+                    if(searchCond.equals("0")) {
+                        solutionName = "%" + searchIn + "%";
+                        solutions = solutionService.listSolutionsByGroupAndSolutionName(solution.getSolutionGroup1(), solutionName, new PageRequest(evalPage, evalPageSize));
+                    } else {
+                        maker = "%" + searchIn + "%";
+                        solutions = solutionService.listSolutionsByGroupAndMaker(solution.getSolutionGroup1(), maker, new PageRequest(evalPage, evalPageSize));
+                    }
                 } else {
                     solutions = solutionService.listSolutionsByGroup(solution.getSolutionGroup1(), new PageRequest(evalPage, evalPageSize));
                 }
             }
             modelAndView.addObject("viewType", viewType.get().toString());
         } else {
-            if (solution != null && solution.getSolutionName() != null && !solution.getSolutionName().equals("")) {
-                solutionName = "%" + solution.getSolutionName() + "%";
-                solutions = solutionService.listSolutionsBySolutionName(solutionName, new PageRequest(evalPage, evalPageSize));
+            if (solution != null && searchIn != null && !searchIn.equals("")) {
+                if(searchCond.equals("0")) {
+                    solutionName = "%" + searchIn + "%";
+                    solutions = solutionService.listSolutionsBySolutionName(solutionName, new PageRequest(evalPage, evalPageSize));
+                } else {
+                    maker = "%" + searchIn + "%";
+                    solutions = solutionService.listSolutionsByMaker(maker, new PageRequest(evalPage, evalPageSize));
+                }
             } else {
                 solutions = solutionService.findAllPageable(new PageRequest(evalPage, evalPageSize));
             }
@@ -138,7 +158,8 @@ public class SolutionController {
             pager = new Pager(solutions.getTotalPages(), solutions.getNumber(), BUTTONS_TO_SHOW);
         }
 
-        modelAndView.addObject("solutionName", solutionName);
+        modelAndView.addObject("searchCondition", searchCond);
+        modelAndView.addObject("searchInput", searchIn);
         modelAndView.addObject("solutions", solutions);
         modelAndView.addObject("selectedPageSize", evalPageSize);
         modelAndView.addObject("pageSizes", PAGE_SIZES);

@@ -10,9 +10,9 @@
             text-align: center;
         }
         #search_input {width:200px; }
-        #total_count, .control-label, #search_input, .btn-default {display:inline-block;}
+        #search_cond {margin-left:640px; width:120px; }
+        #total_count, #search_cond, #search_input, .btn-default {display:inline-block;}
         #total_count {margin-left:30px;}
-        .control-label {margin-left:700px;}
         td {
             white-space: pre-wrap; /* CSS3*/
             white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
@@ -70,8 +70,12 @@
             <input type="hidden" id="solutionGroup2" th:field="*{solutionGroup2}" />
             <div class="row" id="search">
                 <p id="total_count" th:text="'총 건수: ' + ${count} + ' 건'"> </p>
-                <label class="control-label">솔루션명:</label>
-                <input type="text" id="search_input" class="form-control" th:field="*{solutionName}"/>
+                <!--<label class="control-label">Search:</label>-->
+                <select id="search_cond" class="form-control" name="searchCondition">
+                    <option value="0" th:selected="${searchCondition == '0'}">솔루션명</option>
+                    <option value="1" th:selected="${searchCondition == '1'}">제작사</option>
+                </select>
+                <input type="text" id="search_input" name="searchInput" class="form-control" th:value="${searchInput}"/>
                 <button type="submit" class="btn btn-default">검색</button>
             </div>
         </form>

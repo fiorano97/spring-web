@@ -22,11 +22,6 @@ public class SolutionServiceImpl implements SolutionService {
     }
 
     @Override
-    public Page<Solution> listSolutionsBySolutionName(String sName, Pageable pageable) {
-        return solutionRepository.findAllBySolutionNameIsLikeOrderBySolutionName(sName, pageable);
-    }
-
-    @Override
     public Page<Solution> listSolutionsByGroup(String group, Pageable pageable) {
         return solutionRepository.findAllBySolutionGroup1OrderBySolutionName(group, pageable);
     }
@@ -37,6 +32,12 @@ public class SolutionServiceImpl implements SolutionService {
     }
 
     @Override
+    public Page<Solution> listSolutionsBySolutionName(String sName, Pageable pageable) {
+        return solutionRepository.findAllBySolutionNameIsLikeOrderBySolutionName(sName, pageable);
+    }
+
+
+    @Override
     public Page<Solution> listSolutionsByGroupAndSolutionName(String group, String solutionName, Pageable pageable) {
         return solutionRepository.findAllBySolutionGroup1AndSolutionNameIsLikeOrderBySolutionName(group, solutionName, pageable);
     }
@@ -44,6 +45,21 @@ public class SolutionServiceImpl implements SolutionService {
     @Override
     public Page<Solution> listSolutionsByGroup2AndSolutionName(String group, String solutionName, Pageable pageable) {
         return solutionRepository.findAllBySolutionGroup2AndSolutionNameIsLikeOrderBySolutionName(group, solutionName, pageable);
+    }
+
+    @Override
+    public Page<Solution> listSolutionsByMaker(String maker, Pageable pageable) {
+        return solutionRepository.findAllByMakerIsLikeOrderBySolutionName(maker, pageable);
+    }
+
+    @Override
+    public Page<Solution> listSolutionsByGroupAndMaker(String group, String maker, Pageable pageable) {
+        return solutionRepository.findAllBySolutionGroup1AndMakerIsLikeOrderBySolutionName(group, maker, pageable);
+    }
+
+    @Override
+    public Page<Solution> listSolutionsByGroup2AndMaker(String group, String maker, Pageable pageable) {
+        return solutionRepository.findAllBySolutionGroup2AndMakerIsLikeOrderBySolutionName(group, maker, pageable);
     }
 
     @Override

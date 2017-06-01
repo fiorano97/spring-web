@@ -12,5 +12,8 @@ public interface SolutionRepository extends PagingAndSortingRepository<Solution,
     Page<Solution> findAllBySolutionNameIsLikeOrderBySolutionName(String sName, Pageable pageable);
     Page<Solution> findAllBySolutionGroup1AndSolutionNameIsLikeOrderBySolutionName(String group, String sName, Pageable pageable);
     Page<Solution> findAllBySolutionGroup2AndSolutionNameIsLikeOrderBySolutionName(String group, String sName, Pageable pageable);
+    Page<Solution> findAllByMakerIsLikeOrderBySolutionName(String maker, Pageable pageable);
+    Page<Solution> findAllBySolutionGroup1AndMakerIsLikeOrderBySolutionName(String group, String maker, Pageable pageable);
+    Page<Solution> findAllBySolutionGroup2AndMakerIsLikeOrderBySolutionName(String group, String maker, Pageable pageable);
 
 }
