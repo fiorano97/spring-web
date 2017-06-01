@@ -226,7 +226,7 @@ public class SolutionController {
             List<Integer> chList = fileCheckList.get();
             for(int i =0; i < chList.size(); i++){
                 for(int j=0; j < fileIdList.size(); j++) {
-                    if(fileIdList.get(j) == chList.get(i)) {
+                    if(fileIdList.get(j).intValue() == chList.get(i).intValue()) {
                         fileIdList.remove(j);
                         break;
                     }
