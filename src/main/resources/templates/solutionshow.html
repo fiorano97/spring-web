@@ -110,10 +110,12 @@
                     </div>
 
                 </div>
-            <form id="detailForm" method="post" class="form-horizontal">
+            <form id="detailForm" method="post" th:object="${solution}" class="form-horizontal">
                 <input type="hidden" name="viewType" th:value="${viewType}"/>
                 <input type="hidden" name="searchCondition" th:value="${searchCondition}"/>
                 <input type="hidden" name="searchInput" th:value="${searchInput}"/>
+                <input type="hidden" id="solutionGroup" th:field="*{solutionGroup1}" />
+                <input type="hidden" id="solutionGroup2" th:field="*{solutionGroup2}" />
             </form>
             <div class="row">
                 <button id="listBtn" type="button" class="btn btn-default" th:onclick="'list()'">List</button>
