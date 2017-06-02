@@ -46,6 +46,12 @@
             }
             document.getElementById("listform").submit();
        }
+
+
+       function solutionDetailView(action) {
+            document.getElementById("listform").action = '/solution/' + action;
+            document.getElementById("listform").submit();
+       }
     </script>
     <script>
         $(document).ready(function()
@@ -95,7 +101,7 @@
             <tbody>
             <tr th:if="${not #lists.isEmpty(solutions)}" th:each="solution, iterator : ${solutions}">
                 <td width="10" th:text="${iterator.index + 1}"></td>
-                <td width="80"><a th:href="${ '/solution/' + solution.id}"><span th:text="${solution.solutionName}"></span></a></td>
+                <td width="80"><a th:href="'javascript:solutionDetailView(' + ${solution.id} + ')'"><span th:text="${solution.solutionName}"></span></a></td>
                 <td width="40" th:text="${solution.equipment}"></td>
                 <td width="260" th:text="${solution.function}"></td>
                 <td width="60" th:text="${solution.customerBenefit2}"></td>

@@ -52,9 +52,16 @@ public class SolutionController {
     }
 
     @RequestMapping("solution/{id}")
-    public String showSolution(@PathVariable Integer id, Model model){
+    public String showSolution(@RequestParam("searchCondition") Optional<String> searchCondition,
+                               @RequestParam("searchInput") Optional<String> searchInput,
+                               @RequestParam("viewType") Optional<String> viewType,
+                               @PathVariable Integer id, Model model){
         Solution solution = solutionService.getSolutionById(id);
         List<FileInfo> fileInfoList = makeFileInfoList(solution);
+
+        model.addAttribute("searchCondition", searchCondition.orElse("0"));
+        model.addAttribute("searchInput", searchInput.orElse(""));
+        model.addAttribute("viewType", viewType.orElse(""));
         model.addAttribute("solution", solution);
         model.addAttribute("images", solution.getImageId());
         model.addAttribute("files", fileInfoList);

@@ -19,7 +19,8 @@
     </style>
     <script>
         function list(){
-            window.location.href = '/solutions';
+            document.getElementById("detailForm").action = '/solutions';
+            document.getElementById("detailForm").submit();
         }
         function search(id) {
             window.location.href = '/solution/edit/' + id;
@@ -32,7 +33,6 @@
 
     <h2>Solution Details</h2>
         <div>
-            <form class="form-horizontal">
                 <div class="text-group">
                     <label class="col-sm-2 control-label">솔루션 명:</label>
                     <div id="sol_name" class="col-sm-10">
@@ -110,6 +110,10 @@
                     </div>
 
                 </div>
+            <form id="detailForm" method="post" class="form-horizontal">
+                <input type="hidden" name="viewType" th:value="${viewType}"/>
+                <input type="hidden" name="searchCondition" th:value="${searchCondition}"/>
+                <input type="hidden" name="searchInput" th:value="${searchInput}"/>
             </form>
             <div class="row">
                 <button id="listBtn" type="button" class="btn btn-default" th:onclick="'list()'">List</button>
