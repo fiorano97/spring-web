@@ -88,8 +88,8 @@ public class SolutionController {
 
     @RequestMapping(value = "solution", method = RequestMethod.POST)
     public String saveProduct(Solution solution,
-                              @RequestParam("imageCheck") Optional<List<Integer>> imageCheckList,
-                              @RequestParam("fileCheck") Optional<List<Integer>> fileCheckList,
+                              @RequestParam(required = false, value = "imageCheck") List<String> imageCheckList,
+                              @RequestParam(required = false, value = "fileCheck") List<String> fileCheckList,
                               @RequestParam("uploadingImageFiles") MultipartFile[] uploadingImageFiles,
                               @RequestParam("uploadingFiles") MultipartFile[] uploadingFiles){
 
@@ -228,12 +228,11 @@ public class SolutionController {
         return fileList;
     }
 
-    private  List<Integer> deleteCheckedFiles(List<Integer> fileIdList, Optional<List<Integer>> fileCheckList) {
-        if(fileCheckList.isPresent()) {
-            List<Integer> chList = fileCheckList.get();
-            for(int i =0; i < chList.size(); i++){
+    private  List<Integer> deleteCheckedFiles(List<Integer> fileIdList,List<String> fileCheckList) {
+        if(fileCheckList != null) {
+            for(int i =0; i < fileCheckList.size(); i++){
                 for(int j=0; j < fileIdList.size(); j++) {
-                    if(fileIdList.get(j).intValue() == chList.get(i).intValue()) {
+                    if(fileIdList.get(j).intValue() == Integer.parseInt(fileCheckList.get(i))) {
                         fileIdList.remove(j);
                         break;
                     }
