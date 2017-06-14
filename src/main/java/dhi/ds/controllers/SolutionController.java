@@ -7,6 +7,8 @@ import dhi.ds.domain.UploadFile;
 import dhi.ds.services.FileService;
 import dhi.ds.services.SolutionService;
 import dhi.ds.util.MediaUtils;
+import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
@@ -21,6 +23,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -200,6 +204,13 @@ public class SolutionController {
             return ResponseEntity.badRequest().build();
         }
     }
+
+    @RequestMapping(value = "/download", method = RequestMethod.GET)
+    public String downloadExcel(Model model) {
+        model.addAttribute("solutions", solutionService.findAllSolutions());
+        return "";
+    }
+
     private List<FileInfo> makeFileInfoList(Solution solution) {
         List<FileInfo> fileInfoList = new LinkedList<>();
         for(int i = 0; i < solution.getFileId().size(); i++) {

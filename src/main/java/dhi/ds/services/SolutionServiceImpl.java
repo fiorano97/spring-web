@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SolutionServiceImpl implements SolutionService {
     private SolutionRepository solutionRepository;
@@ -60,6 +62,11 @@ public class SolutionServiceImpl implements SolutionService {
     @Override
     public Page<Solution> listSolutionsByGroup2AndMaker(String group, String maker, Pageable pageable) {
         return solutionRepository.findAllBySolutionGroup2AndMakerIsLikeOrderBySolutionName(group, maker, pageable);
+    }
+
+    @Override
+    public Iterable<Solution> findAllSolutions() {
+        return solutionRepository.findAll();
     }
 
     @Override

@@ -223,4 +223,8 @@ public class Solution {
     public void setTime(Timestamp time) {
         this.time = time;
     }
+
+    public int getColumnCount() {
+        return getClass().getDeclaredFields().length;
+    }
 }

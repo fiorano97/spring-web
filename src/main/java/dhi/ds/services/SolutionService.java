@@ -5,6 +5,8 @@ import dhi.ds.domain.Solution;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 public interface SolutionService {
 
     Page<Solution> findAllPageable(Pageable pageable);
@@ -24,6 +26,8 @@ public interface SolutionService {
     Page<Solution> listSolutionsByGroupAndMaker(String group, String maker, Pageable pageable);
 
     Page<Solution> listSolutionsByGroup2AndMaker(String group, String maker, Pageable pageable);
+
+    Iterable<Solution> findAllSolutions();
 
     Solution getSolutionById(Integer id);
 

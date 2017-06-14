@@ -52,6 +52,7 @@
             document.getElementById("listform").action = '/solution/' + action;
             document.getElementById("listform").submit();
        }
+
     </script>
     <script>
         $(document).ready(function()
@@ -118,7 +119,7 @@
                 <option th:each="pageSize : ${pageSizes}" th:text="${pageSize}" th:value="${pageSize}" th:selected="${pageSize} == ${selectedPageSize}"></option>
             </select>
         </div>-->
-        <div th:if="${solutions.totalPages > 0 }" class="form-group col-md-11 pagination-centered">
+        <div id="paginationForm" th:if="${solutions.totalPages > 0 }" class="form-group col-md-11 pagination-centered">
             <ul class="pagination">
                 <li th:class="${solutions.number == 0} ? disabled" >
                     <a id="left_double_arrow" class="pageLink" th:href="'javascript:search(' + ${selectedPageSize} + ', 1, -2)'">&laquo;</a>
