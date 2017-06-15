@@ -1,0 +1,17 @@
+-- Table: public.solution_file_id
+
+-- DROP TABLE public.solution_file_id;
+
+CREATE TABLE public.solution_file_id
+(
+  solution_id integer NOT NULL,
+  file_id integer,
+  CONSTRAINT fkickd4om2tr8lc8el04efnw0jp FOREIGN KEY (solution_id)
+      REFERENCES public.solution (id) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.solution_file_id
+  OWNER TO postgres;

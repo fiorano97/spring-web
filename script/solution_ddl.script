@@ -10,11 +10,7 @@ CREATE TABLE public.solution
   cb_2 character varying(255),
   dtype character varying(255),
   eq character varying(255),
-  file bytea,
-  func character varying(512),
-  desc character varying(5000),
-  img_id character varying(255),
-  img_name character varying(255),
+  func character varying(5000),
   maker character varying(255),
   ref character varying(255),
   sg_1 character varying(255),
@@ -24,7 +20,8 @@ CREATE TABLE public.solution
   source character varying(255),
   supplier character varying(255),
   "time" timestamp without time zone,
-  CONSTRAINT solution_pkey PRIMARY KEY ()
+  description character varying(5000),
+  CONSTRAINT solution_pkey PRIMARY KEY (id)
 )
 WITH (
   OIDS=FALSE
