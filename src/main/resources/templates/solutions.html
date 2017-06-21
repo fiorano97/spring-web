@@ -24,24 +24,25 @@
 
     <script type="text/javascript">
         function search(pageSize, page, flag) {
+
             $('#pageSize').val(pageSize);
             $('#page').val(page);
 
             if(flag == -2) {
                 if ($('#left_double_arrow').closest("li").attr("class") == 'disabled') {
-                    return false;
+                    event.returnValue = false;
                 }
             } else if(flag == -1) {
                 if ($('#left_arrow').closest("li").attr("class") == 'disabled') {
-                    return false;
+                    event.returnValue = false;
                 }
             } else if(flag == 1) {
                 if ($('#right_arrow').closest("li").attr("class") == 'disabled') {
-                    return false;
+                    event.returnValue = false;
                 }
             } else if(flag == 2) {
                 if ($('#right_double_arrow').closest("li").attr("class") == 'disabled') {
-                    return false;
+                    event.returnValue = false;
                 }
             }
             document.getElementById("listform").submit();
