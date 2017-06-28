@@ -35,33 +35,33 @@ public class SolutionServiceImpl implements SolutionService {
 
     @Override
     public Page<Solution> listSolutionsBySolutionName(String sName, Pageable pageable) {
-        return solutionRepository.findAllBySolutionNameIsLikeOrderBySolutionName(sName, pageable);
+        return solutionRepository.findAllBySolutionNameIgnoreCaseContainingOrderBySolutionName(sName, pageable);
     }
 
 
     @Override
     public Page<Solution> listSolutionsByGroupAndSolutionName(String group, String solutionName, Pageable pageable) {
-        return solutionRepository.findAllBySolutionGroup1AndSolutionNameIsLikeOrderBySolutionName(group, solutionName, pageable);
+        return solutionRepository.findAllBySolutionGroup1AndSolutionNameIgnoreCaseContainingOrderBySolutionName(group, solutionName, pageable);
     }
 
     @Override
     public Page<Solution> listSolutionsByGroup2AndSolutionName(String group, String solutionName, Pageable pageable) {
-        return solutionRepository.findAllBySolutionGroup2AndSolutionNameIsLikeOrderBySolutionName(group, solutionName, pageable);
+        return solutionRepository.findAllBySolutionGroup2AndSolutionNameIgnoreCaseContainingOrderBySolutionName(group, solutionName, pageable);
     }
 
     @Override
     public Page<Solution> listSolutionsByMaker(String maker, Pageable pageable) {
-        return solutionRepository.findAllByMakerIsLikeOrderBySolutionName(maker, pageable);
+        return solutionRepository.findAllByMakerIgnoreCaseContainingOrderBySolutionName(maker, pageable);
     }
 
     @Override
     public Page<Solution> listSolutionsByGroupAndMaker(String group, String maker, Pageable pageable) {
-        return solutionRepository.findAllBySolutionGroup1AndMakerIsLikeOrderBySolutionName(group, maker, pageable);
+        return solutionRepository.findAllBySolutionGroup1AndMakerIgnoreCaseContainingOrderBySolutionName(group, maker, pageable);
     }
 
     @Override
     public Page<Solution> listSolutionsByGroup2AndMaker(String group, String maker, Pageable pageable) {
-        return solutionRepository.findAllBySolutionGroup2AndMakerIsLikeOrderBySolutionName(group, maker, pageable);
+        return solutionRepository.findAllBySolutionGroup2AndMakerIgnoreCaseContainingOrderBySolutionName(group, maker, pageable);
     }
 
     @Override

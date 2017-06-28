@@ -20,6 +20,8 @@
             white-space: -o-pre-wrap; /* Opera 7 */
             word-wrap: break-all; /* Internet Explorer 5.5+ */
         }
+        h2, h4 {display:inline-block;}
+        h4 { margin-left: 1%;}
     </style>
 
     <script type="text/javascript">
@@ -68,8 +70,14 @@
     <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
 
     <div >
-        <!--<h2 th:text=" ${viewType} != null ? 'Solution List (' + ${viewType} + ')' : 'Solution List'"> Solution List</h2>-->
-        <h2> Solution List </h2>
+        <div th:if="${viewType == null}">
+            <h2> Solution List </h2>
+            <h4></h4>
+        </div>
+        <div th:unless="${viewType == null}">
+            <h2> Solution List </h2>
+            <h4 th:text=" ${viewType != 'AssetValueView'} ? ' (' + ${solution.solutionGroup1} + ')': ' (' + ${solution.solutionGroup2} + ')'"> Solution List</h4>
+        </div>
         <form id="listform" method="post" th:object="${solution}" th:action = "@{/solutions}">
             <input type="hidden" id="pageSize" name="pageSize" th:value="${pageSize}"/>
             <input type="hidden" id="page" name="page" th:value="${page}"/>
