@@ -151,7 +151,7 @@ public class ExcelView extends AbstractXlsView {
             userRow.getCell(3).setCellStyle(style4);
             userRow.createCell(4).setCellValue(solution.getSolutionType());
             userRow.getCell(4).setCellStyle(style4);
-            userRow.createCell(5).setCellValue(solution.getCustomerBenefit1());
+            userRow.createCell(5).setCellValue(solution.getCustomerBenefit2());
             userRow.getCell(5).setCellStyle(style4);
 
             userRow.createCell(6).setCellValue(solution.getMonitoringYn());

@@ -48,31 +48,25 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">Equipment</label>
+                <label class="col-sm-2 control-label">Equipment: </label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" th:field="*{equipment}"/>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">Component</label>
+                <label class="col-sm-2 control-label">Component: </label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" th:field="*{component}"/>
                 </div>
             </div>
-            <div class="form-group">
+            <!--<div class="form-group">
                 <label class="col-sm-2 control-label">Customer Benefit #1 </label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" th:field="*{customerBenefit1}"/>
                 </div>
-            </div>
+            </div>-->
             <div class="form-group">
-                <label class="col-sm-2 control-label">Customer Benefit #2 </label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" th:field="*{customerBenefit2}"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">솔루션 속성(Function) </label>
+                <label class="col-sm-2 control-label">솔루션 속성(Function): </label>
                 <div class="col-sm-10">
                     <input class="chk" type="checkbox" name="functionCheck"  th:value="0" th:checked="${monitoring} == 'Y'" />
                     <p class="txtp">Monitoring</p>
@@ -85,7 +79,7 @@
                     <input class="chk" type="checkbox" name="functionCheck"  th:value="4" th:checked="${management} == 'Y'" />
                     <p class="txtp">Management</p>
                 </div>
-                <label class="col-sm-2 control-label">솔루션 속성(Value) </label>
+                <label class="col-sm-2 control-label">솔루션 속성(Value): </label>
                 <div class="col-sm-10">
                     <input class="chk" type="checkbox" name="valueCheck"  th:value="0" th:checked="${efficiency} == 'Y'" />
                     <p class="txtp">Efficiency</p>
@@ -95,6 +89,12 @@
                     <p class="txtp">Availability</p>
                     <input class="chk" type="checkbox" name="valueCheck"  th:value="3" th:checked="${emission} == 'Y'" />
                     <p class="txtp">Emission</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">고객 Value: </label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" th:field="*{customerBenefit2}"/>
                 </div>
             </div>
             <!--<input class="checkbox_image" type="checkbox" name="imageCheck" th:value="${fileId}" />-->
