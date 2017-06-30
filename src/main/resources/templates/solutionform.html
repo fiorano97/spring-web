@@ -12,6 +12,9 @@
         #descDiv {height:110px;}
         textarea {resize: none;}
         textarea.form-control {height:100%;}
+        .chk, .txtp {display:inline-block;}
+        .chk {width: 17px; height: 17px;}
+        .txtp {font-size: 17px;}
     </style>
 </head>
 <body>
@@ -33,13 +36,13 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">Solution Group (Functional View):</label>
+                <label class="col-sm-2 control-label">Solution Group <br />(Functional View):</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" th:field="*{solutionGroup1}"/>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">Solution Group (Asset Value View):</label>
+                <label class="col-sm-2 control-label">Solution Group <br />(Asset Value View):</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" th:field="*{solutionGroup2}"/>
                 </div>
@@ -69,6 +72,33 @@
                 </div>
             </div>
             <div class="form-group">
+                <label class="col-sm-2 control-label">솔루션 속성(Function) </label>
+                <div class="col-sm-10">
+                    <input class="chk" type="checkbox" name="functionCheck"  th:value="0" th:checked="${monitoring} == 'Y'" />
+                    <p class="txtp">Monitoring</p>
+                    <input class="chk" type="checkbox" name="functionCheck"  th:value="1" th:checked="${prediction} == 'Y'" />
+                    <p class="txtp">Prediction</p>
+                    <input class="chk" type="checkbox" name="functionCheck"  th:value="2" th:checked="${diagnosis} == 'Y'" />
+                    <p class="txtp">Diagnosis</p>
+                    <input class="chk" type="checkbox" name="functionCheck"  th:value="3" th:checked="${optimization} == 'Y'" />
+                    <p class="txtp">Optimization</p>
+                    <input class="chk" type="checkbox" name="functionCheck"  th:value="4" th:checked="${management} == 'Y'" />
+                    <p class="txtp">Management</p>
+                </div>
+                <label class="col-sm-2 control-label">솔루션 속성(Value) </label>
+                <div class="col-sm-10">
+                    <input class="chk" type="checkbox" name="valueCheck"  th:value="0" th:checked="${efficiency} == 'Y'" />
+                    <p class="txtp">Efficiency</p>
+                    <input class="chk" type="checkbox" name="valueCheck"  th:value="1" th:checked="${flexibility} == 'Y'" />
+                    <p class="txtp">Flexibility</p>
+                    <input class="chk" type="checkbox" name="valueCheck"  th:value="2" th:checked="${availability} == 'Y'" />
+                    <p class="txtp">Availability</p>
+                    <input class="chk" type="checkbox" name="valueCheck"  th:value="3" th:checked="${emission} == 'Y'" />
+                    <p class="txtp">Emission</p>
+                </div>
+            </div>
+            <!--<input class="checkbox_image" type="checkbox" name="imageCheck" th:value="${fileId}" />-->
+            <div class="form-group">
                 <label class="col-sm-2 control-label">주요 기능:</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" th:field="*{function}"/>
@@ -93,7 +123,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">Solution Type <br/>(SW, SW+HW):</label>
+                <label class="col-sm-2 control-label">Solution Type <br/>(SW, HW+SW):</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" th:field="*{solutionType}"/>
                 </div>

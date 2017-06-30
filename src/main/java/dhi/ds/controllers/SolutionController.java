@@ -69,6 +69,17 @@ public class SolutionController {
         model.addAttribute("solution", solution);
         model.addAttribute("images", solution.getImageId());
         model.addAttribute("files", fileInfoList);
+        //solution Attribute(function)
+        model.addAttribute("monitoring", solution.getMonitoringYn());
+        model.addAttribute("prediction", solution.getPredictionYn());
+        model.addAttribute("diagnosis", solution.getDiagnosisYn());
+        model.addAttribute("optimization", solution.getOptimizationYn());
+        model.addAttribute("management", solution.getManagementYn());
+        //solution Attribute(value)
+        model.addAttribute("efficiency", solution.getEfficiencyYn());
+        model.addAttribute("flexibility", solution.getFlexibilityYn());
+        model.addAttribute("availability", solution.getAvailabilityYn());
+        model.addAttribute("emission", solution.getEmissionYn());
         return "solutionshow";
     }
 
@@ -80,6 +91,17 @@ public class SolutionController {
         model.addAttribute("images", solution.getImageId());
         model.addAttribute("files", fileInfoList);
         model.addAttribute("type", "edit");
+        //solution Attribute(function)
+        model.addAttribute("monitoring", solution.getMonitoringYn());
+        model.addAttribute("prediction", solution.getPredictionYn());
+        model.addAttribute("diagnosis", solution.getDiagnosisYn());
+        model.addAttribute("optimization", solution.getOptimizationYn());
+        model.addAttribute("management", solution.getManagementYn());
+        //solution Attribute(value)
+        model.addAttribute("efficiency", solution.getEfficiencyYn());
+        model.addAttribute("flexibility", solution.getFlexibilityYn());
+        model.addAttribute("availability", solution.getAvailabilityYn());
+        model.addAttribute("emission", solution.getEmissionYn());
         return "solutionform";
     }
 
@@ -87,6 +109,17 @@ public class SolutionController {
     public String newSolution(Model model){
         model.addAttribute("solution", new Solution());
         model.addAttribute("type", "insert");
+        //solution Attribute(function)
+        model.addAttribute("monitoring", "N");
+        model.addAttribute("prediction", "N");
+        model.addAttribute("diagnosis", "N");
+        model.addAttribute("optimization", "N");
+        model.addAttribute("management", "N");
+        //solution Attribute(value)
+        model.addAttribute("efficiency", "N");
+        model.addAttribute("flexibility", "N");
+        model.addAttribute("availability", "N");
+        model.addAttribute("emission", "N");
         return "solutionform";
     }
 
@@ -94,13 +127,49 @@ public class SolutionController {
     public String saveProduct(Solution solution,
                               @RequestParam(required = false, value = "imageCheck") List<String> imageCheckList,
                               @RequestParam(required = false, value = "fileCheck") List<String> fileCheckList,
+                              @RequestParam(required = false, value = "functionCheck") List<String> functionCheckList,
+                              @RequestParam(required = false, value = "valueCheck") List<String> valueCheckList,
                               @RequestParam("uploadingImageFiles") MultipartFile[] uploadingImageFiles,
                               @RequestParam("uploadingFiles") MultipartFile[] uploadingFiles){
 
         solution.setImageId(storeFiles(deleteCheckedFiles(solution.getImageId(), imageCheckList), uploadingImageFiles));
         solution.setFileId(storeFiles(deleteCheckedFiles(solution.getFileId(), fileCheckList), uploadingFiles));
 
-        solutionService.saveSolution(solution);
+        if(functionCheckList != null) {
+            for (String functionValue : functionCheckList) {
+                if (functionValue.equals("0")) {
+                    solution.setMonitoringYn("Y");
+                } else if (functionValue.equals("1")) {
+                    solution.setPredictionYn("Y");
+                } else if (functionValue.equals("2")) {
+                    solution.setDiagnosisYn("Y");
+                } else if (functionValue.equals("3")) {
+                    solution.setOptimizationYn("Y");
+                } else {
+                    solution.setManagementYn("Y");
+                }
+            }
+            solution.setFunctionInfo(functionCheckList);
+        }
+
+        if(valueCheckList != null) {
+
+            for (String valueCheck : valueCheckList) {
+                if (valueCheck.equals("0")) {
+                    solution.setEfficiencyYn("Y");
+                } else if (valueCheck.equals("1")) {
+                    solution.setFlexibilityYn("Y");
+                } else if (valueCheck.equals("2")) {
+                    solution.setAvailabilityYn("Y");
+                } else if (valueCheck.equals("3")) {
+                    solution.setEmissionYn("Y");
+                }
+            }
+
+            solution.setValueInfo(valueCheckList);
+        }
+
+         solutionService.saveSolution(solution);
 
         return "redirect:/solution/" + solution.getId();
     }

@@ -1,6 +1,7 @@
 package dhi.ds.domain;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -65,8 +66,28 @@ public class Solution {
     @ElementCollection
     private List<Integer> imageId;
 
+    @Column(name = "function_info")
+    @ElementCollection
+    private List<String> functionInfo;
+
+    @Column(name = "value_info")
+    @ElementCollection
+    private List<String> valueInfo;
+
     @Column(name="time")
     private Timestamp time;
+
+    private String monitoringYn;
+    private String predictionYn;
+    private String diagnosisYn;
+    private String optimizationYn;
+    private String managementYn;
+    private String efficiencyYn;
+    private String flexibilityYn;
+    private String availabilityYn;
+    private String emissionYn;
+
+
 
     public Solution () {
         setTime(new Timestamp(System.currentTimeMillis()));
@@ -216,6 +237,22 @@ public class Solution {
         this.imageId = imageId;
     }
 
+    public List<String> getFunctionInfo() {
+        return functionInfo;
+    }
+
+    public void setFunctionInfo(List<String> functionInfo) {
+        this.functionInfo = functionInfo;
+    }
+
+    public List<String> getValueInfo() {
+        return valueInfo;
+    }
+
+    public void setValueInfo(List<String> valueInfo) {
+        this.valueInfo = valueInfo;
+    }
+
     public Timestamp getTime() {
         return time;
     }
@@ -226,5 +263,77 @@ public class Solution {
 
     public int getColumnCount() {
         return getClass().getDeclaredFields().length;
+    }
+
+    public String getMonitoringYn() {
+        return monitoringYn;
+    }
+
+    public void setMonitoringYn(String monitoringYn) {
+        this.monitoringYn = monitoringYn;
+    }
+
+    public String getPredictionYn() {
+        return predictionYn;
+    }
+
+    public void setPredictionYn(String predictionYn) {
+        this.predictionYn = predictionYn;
+    }
+
+    public String getDiagnosisYn() {
+        return diagnosisYn;
+    }
+
+    public void setDiagnosisYn(String diagnosisYn) {
+        this.diagnosisYn = diagnosisYn;
+    }
+
+    public String getOptimizationYn() {
+        return optimizationYn;
+    }
+
+    public void setOptimizationYn(String optimizationYn) {
+        this.optimizationYn = optimizationYn;
+    }
+
+    public String getManagementYn() {
+        return managementYn;
+    }
+
+    public void setManagementYn(String managementYn) {
+        this.managementYn = managementYn;
+    }
+
+    public String getEfficiencyYn() {
+        return efficiencyYn;
+    }
+
+    public void setEfficiencyYn(String efficiencyYn) {
+        this.efficiencyYn = efficiencyYn;
+    }
+
+    public String getFlexibilityYn() {
+        return flexibilityYn;
+    }
+
+    public void setFlexibilityYn(String flexibilityYn) {
+        this.flexibilityYn = flexibilityYn;
+    }
+
+    public String getAvailabilityYn() {
+        return availabilityYn;
+    }
+
+    public void setAvailabilityYn(String availabilityYn) {
+        this.availabilityYn = availabilityYn;
+    }
+
+    public String getEmissionYn() {
+        return emissionYn;
+    }
+
+    public void setEmissionYn(String emissionYn) {
+        this.emissionYn = emissionYn;
     }
 }
