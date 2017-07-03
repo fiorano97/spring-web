@@ -41,8 +41,13 @@
         #cm_1, #cm_2, #cm_3, #in_1, #in_4 {width: 932px; height: 20px;}
         #in_3 {margin-left:275px;}
 
-    </style><!--
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
+        .tooltip-styling{
+            background:gray !important;
+            color: white !important;
+        }
+
+
+    </style>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript">
         function linkSolutionGroup(solutionGroup2){
@@ -50,6 +55,16 @@
             document.getElementById("listform").submit();
         }
    </script>
+    <script>
+        $(function(){
+            $(document).tooltip({
+                tooltipClass: "tooltip-styling",
+                position: {
+                    my: "left+15 center", at: "center bottom+10"
+                }
+            });
+        });
+    </script>
 </head>
 <body>
 
@@ -90,16 +105,16 @@
         </div>
         <div id="value" class="ui-widget-content">
             <div id="efficiency" class="ui-widget-content">
-                <p>Efficiency</p>
+                <p title="기기 성능/효율 감시 및 향상 관련 기능">Efficiency</p>
             </div>
             <div id="emission" class="ui-widget-content">
-                <p>Emission</p>
+                <p title="오염물질(SOx, NOx, CO) 배출 모니터링 및 최소화">Emission</p>
             </div>
             <div id="flexibility" class="ui-widget-content">
-                <p>Flexibility</p>
+                <p title="부하변동 시 기기 설계 한계치 이하에서 최대한의 추종성 보장">Flexibility</p>
             </div>
             <div id="availability" class="ui-widget-content">
-                <p>Availability</p>
+                <p title="기기 고장 감시 및 예방을 통한 비계획 기동정지 방지">Availability</p>
             </div>
         </div>
     </div>
