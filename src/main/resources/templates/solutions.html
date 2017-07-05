@@ -60,7 +60,17 @@
     <script>
         $(document).ready(function()
             {
-                $("#myTable").tablesorter({headers: { 0:{sorter: false}}});
+                var num = document.getElementById("solutionNumber").getAttribute("value");
+                $.tablesorter.addWidget({
+                    id: "indexFirstColumn",
+                    format: function(table) {
+                        $(table).find("tr td:first-child").each(function(index){
+                            $(this).text(index+1 + num * 10);
+                        })
+                    }
+                });
+
+                $("#myTable").tablesorter({headers: { 0:{sorter: false}},  widgets: ['indexFirstColumn']});
             }
         );
     </script>
@@ -84,6 +94,7 @@
             <input type="hidden" id="viewType" name="viewType" th:value="${viewType}"/>
             <input type="hidden" id="solutionGroup" th:field="*{solutionGroup1}" />
             <input type="hidden" id="solutionGroup2" th:field="*{solutionGroup2}" />
+            <input type="hidden" id="solutionNumber" th:value="${solutions.number}" />
             <div class="row" id="search">
                 <p id="total_count" th:text="'총 건수: ' + ${count} + ' 건'"> </p>
                 <!--<label class="control-label">Search:</label>-->
