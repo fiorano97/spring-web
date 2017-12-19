@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Digital Solution Map</title>
+
+    <th:block th:include="fragments/headerinc :: head"></th:block>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+</head>
+<body>
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <h2>User List</h2>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>ID(Email)</th>
+            <th>Role</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${not #lists.isEmpty(users)}" th:each="user, iterator : ${users}">
+            <td width="20" th:text="${iterator.index + 1}"></td>
+            <td width="50"><a th:href="'/user/' + ${user.id}"><span th:text="${user.email}"></span></a></td>
+            <td width="30" th:text="${user.role}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

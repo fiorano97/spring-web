@@ -78,7 +78,6 @@
 <body>
 <div class="container">
     <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
-
     <div >
         <div th:if="${viewType == null}">
             <h2> Solution List </h2>
@@ -103,7 +102,7 @@
                     <option value="1" th:selected="${searchCondition == '1'}">제작사</option>
                 </select>
                 <input type="text" id="search_input" name="searchInput" class="form-control" th:value="${searchInput}"/>
-                <button type="submit" class="btn btn-default">검색</button>
+                <button type="submit" class="btn btn-primary">검색</button>
             </div>
         </form>
         <table id="myTable" class="table table-striped tablesorter">

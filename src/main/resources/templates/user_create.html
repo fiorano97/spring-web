@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Digital Solution Map</title>
+
+    <th:block th:include="fragments/headerinc :: head"></th:block>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <style>
+        .row {margin-left: 17%;}
+        #role {width:120px; }
+        p {color: red;}
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0); /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 37%;
+            left: 52%;
+            background-color: #fefefe;
+            /*margin: 15% auto; /* 15% from the top and centered */
+            margin-left: -180px;
+            margin-top: -50px;
+            border: 1px solid #888;
+            width: 310px; /* Could be more or less, depending on screen size */
+            heigh: 130px;
+            padding-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        .notice_text, .X_text {
+            display:inline-block;
+        }
+    </style>
+
+    <script type="text/javascript">
+        function modalForm() {
+            $('#ds_form').submit();
+        }
+    </script>
+
+</head>
+<body>
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <h2>Sign Up</h2>
+
+    <form class="form-horizontal" name="form" th:action="@{/user/create}" th:object="${form}" method="post">
+       <!-- <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>-->
+
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">아이디(Email)</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="email" th:field="*{email}" required="true" />
+                <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">비밀번호</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="password" th:field="*{password}" required="true" />
+                <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">비밀번호 확인</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="password" th:field="*{passwordRepeated}" required="true"/>
+                <p th:if="${#fields.hasErrors('passwordRepeated')}" th:errors="*{passwordRepeated}" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">사용자 권한</label>
+            <div class="col-sm-4">
+                <select class="form-control" name="role" id="role" required="true" th:disabled="true">
+                    <option value="USER" th:selected="${form.role == 'USER'}">등록/수정</option>
+                    <!--<option value="ADMIN" th:selected="${form.role == 'ADMIN'}">ADMIN</option>-->
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <button id="btn-submit" type="submit" class="btn btn-primary">권한요청</button>
+        </div>
+    </form>
+
+        <div id="render_page" class="modal" th:if="${flag} == 'Y'" role="dialog">
+            <form id="ds_form" name="ds_register" th:action="@{/}" method="get">
+                <div class="modal-content">
+                    <div class="notice" style="width:100%;height: 27px;background-color: #979797;"><p class="notice_text" align="left"
+                                                                                                      style="width:145px;vertical-align: middle;color:#ffffff;margin:0;font-size:14px;font-weight: bold;">
+                        NOTICE</p><p class="X_text" align="right" style="cursor:pointer;width:145px;color:#ffffff;margin:0;vertical-align: middle;" onclick="modalForm();">&#10006;</p></div>
+                    <div class="notice-content" style="width: 100%;height: 40px;background-color: #fafcfe;">
+                        <p align="center">The request has been comleted </p>
+                    </div>
+                    <div class="notice_bottom" style="width:100%;height: 20px;">
+                        <div class="notice_button"
+                             style="margin: 0 240px;cursor: pointer;width:60px; height:21px;border-radius:4px; background-color:#0092d0;" onclick="modalForm();">
+                            <p id="p_notice_button"
+                               style="margin:0;height:17px;  font-size: 14px;font-weight: 500;color: #ffffff;">확인</p>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+        <!--<div class="modal fade" id="render_page" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="form-horizontal">
+
+                        <div class="modal-body">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <div id="user_msg" align="left">Rendering Page... </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>-->
+
+</div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>User details</title>
+
+    <th:block th:include="fragments/headerinc :: head"></th:block>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+</head>
+<body>
+<nav role="navigation">
+    <ul>
+        <li><a href="/">Home</a></li>
+    </ul>
+</nav>
+
+<h1>User details</h1>
+
+<p th:text="'Email : '+ ${user.email}">E-mail</p>
+
+<p th:text="'Role : '+ ${user.role}">Role</p>
+
+</body>
+</html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head lang="en">
 
     <title>Digital Solution Map</title>
@@ -147,8 +147,8 @@
                 <input type="hidden" id="solutionGroup2" th:field="*{solutionGroup2}" />
             </form>
             <div class="row">
-                <button id="listBtn" type="button" class="btn btn-default" th:onclick="'list()'">List</button>
-                <button id="editBtn" type="button" class="btn btn-default" th:onclick="'search(' + ${solution.id} +')'">Edit</button>
+                <button id="listBtn" type="button" class="btn btn-primary" th:onclick="'list()'">List</button>
+                <button sec:authorize="isAuthenticated()" id="editBtn" type="button" class="btn btn-default" th:onclick="'search(' + ${solution.id} +')'">Edit</button>
             </div>
     </div>
 </div>

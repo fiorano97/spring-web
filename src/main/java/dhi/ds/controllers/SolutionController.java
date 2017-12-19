@@ -190,8 +190,9 @@ public class SolutionController {
         String searchIn = searchInput.orElse("");
         Page<Solution> solutions = null;
         String solutionName, maker = null;
-        if(viewType.isPresent() && !viewType.get().toString().equals("")) {
-            if(viewType.get().toString().equals("AssetValueView")) {
+        String view = viewType.get().toString();
+        if(viewType.isPresent() && !view.equals("")) {
+            if(view.equals("AssetValueView")) {
 
                 if (solution != null && searchIn != null && !searchIn.equals("")) {
                     if(searchCond.equals("0")) {
@@ -217,7 +218,7 @@ public class SolutionController {
                     solutions = solutionService.listSolutionsByGroup(solution.getSolutionGroup1(), new PageRequest(evalPage, evalPageSize));
                 }
             }
-            modelAndView.addObject("viewType", viewType.get().toString());
+            modelAndView.addObject("viewType", view);
         } else {
             if (solution != null && searchIn != null && !searchIn.equals("")) {
                 if(searchCond.equals("0")) {

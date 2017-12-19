@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,4 +56,14 @@ public class WebConfiguration  extends WebMvcConfigurerAdapter {
     public ViewResolver pdfViewResolver() {
         return new PdfViewResolver();
     }
+
+ /*   @Bean
+    public SpringTemplateEngine templateEngine() {
+        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+        ClassLoaderTemplateResolver  templateResolver = new ClassLoaderTemplateResolver();
+        templateEngine.setTemplateResolver(templateResolver);
+        //templateEngine.addDialect(new TilesDialect());
+        templateEngine.addDialect(new SpringSecurityDialect());
+        return templateEngine;
+    }*/
 }
